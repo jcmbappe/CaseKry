@@ -9,7 +9,9 @@ data class Service(
     @ColumnInfo(name = COLUMN_NAME)
     var name: String,
     @ColumnInfo(name = COLUMN_URL)
-    var url: String
+    var url: String,
+    @ColumnInfo(name = COLUMN_STATUS)
+    var status : ServiceStatus
 ) : DataEntity() {
 
     companion object {
@@ -17,6 +19,7 @@ data class Service(
         const val COLUMN_ID = "id"
         const val COLUMN_NAME = "name"
         const val COLUMN_URL = "url"
+        const val COLUMN_STATUS = "status"
     }
 
     @PrimaryKey(autoGenerate = true)

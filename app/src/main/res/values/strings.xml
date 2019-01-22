@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">CaseKry</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="status_ok">Status : OK</string>
+    <string name="status_fail">Status : FAIL</string>
 </resources>
