@@ -1,11 +1,12 @@
-package com.example.casekry
+package com.example.casekry.activities
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.casekry.databinding.ActivityMainBinding
-import com.example.casekry.fragment.ServiceListFragment
+import com.example.casekry.fragment.serviceList.ServiceListFragment
+import com.example.casekry.R
 
 class MainActivity : AppCompatActivity() {
 
