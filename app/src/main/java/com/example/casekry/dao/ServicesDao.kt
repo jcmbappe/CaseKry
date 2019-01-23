@@ -13,6 +13,6 @@ interface ServicesDao : DoaInterface<Service> {
     @Query("SELECT * FROM ${Service.TABLE_NAME} ORDER BY ${Service.COLUMN_ID}")
     override fun getEntities(): LiveData<List<Service>>
 
-    @Query("SELECT * FROM ${Service.TABLE_NAME} WHERE id = :id")
+    @Query("SELECT * FROM ${Service.TABLE_NAME} WHERE ${Service.COLUMN_ID} = :id")
     override fun getEntity(id: Long): LiveData<Service>
 }
