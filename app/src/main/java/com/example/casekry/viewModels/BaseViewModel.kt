@@ -25,22 +25,15 @@ abstract class BaseViewModel<ENTITY : DataEntity>(application: Application, val 
     }
 
     class Factory<ENTITY : DataEntity> constructor(
-        private val application: Application
+        private val application: Application,
+        private val baseRepository: BaseRepository<ENTITY>
     ) : ViewModelProvider.NewInstanceFactory() {
-        private lateinit var baseRepository: BaseRepository<ENTITY>
 
         companion object {
-            private var instance: Factory<*>? = null
-
-            fun <ENTITY : DataEntity> getIntance(
+            fun <ENTITY : DataEntity> get(
                 fragment: Fragment,
                 repository: BaseRepository<ENTITY>
-            ): Factory<ENTITY> {
-                if (instance == null) {
-                    instance = Factory<ENTITY>(checkApplication(checkActivity(fragment)))
-                }
-                return instance
-            }
+            ): Factory<ENTITY> = Factory(checkApplication(checkActivity(fragment)), repository)
 
             private fun checkApplication(activity: Activity): Application {
                 return activity.application
