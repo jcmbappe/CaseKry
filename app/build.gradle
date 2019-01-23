@@ -22,6 +22,14 @@ android {
     dataBinding {
         enabled = true
     }
+
+    repositories {
+        jcenter()
+    }
+}
+
+repositories {
+    mavenCentral()
 }
 
 dependencies {
@@ -35,8 +43,14 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation "androidx.cardview:cardview:$rootProject.supportLibraryVersion"
 
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version"
+
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+
+    implementation "org.koin:koin-core:$rootProject.koinVersion"
+    implementation "org.koin:koin-android:$rootProject.koinVersion"
+    implementation "org.koin:koin-androidx-scope:$rootProject.koinVersion"
 
     testImplementation 'junit:junit:4.12'
 
