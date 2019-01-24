@@ -2,8 +2,12 @@ package com.example.casekry.fragment.form
 
 import android.app.Application
 import androidx.databinding.ObservableField
+import androidx.lifecycle.MutableLiveData
 import com.example.casekry.data.entities.Service
+import com.example.casekry.data.entities.ServiceStatus
+import com.example.casekry.modules.NetworkCallback
 import com.example.casekry.repositories.BaseRepository
+import com.example.casekry.utilities.KotlinTools
 import com.example.casekry.viewModels.BaseViewModel
 
 class FormViewModel(application: Application, repository: BaseRepository<Service>) :
@@ -11,4 +15,35 @@ class FormViewModel(application: Application, repository: BaseRepository<Service
 
     val name = ObservableField<String>()
     val url = ObservableField<String>()
+
+    val nameError = MutableLiveData<Boolean>()
+    val urlError = MutableLiveData<Boolean>()
+
+    val callInProgress = MutableLiveData<Boolean>()
+
+    fun validation(callCompleteCallBack: () -> Unit) {
+        if (name.get().isNullOrEmpty() || url.get().isNullOrEmpty()) {
+            when {
+                name.get().isNullOrEmpty() -> nameError.value = true
+                url.get().isNullOrEmpty() -> urlError.value = true
+            }
+        }
+
+        KotlinTools.let(name.get(), url.get()) { name, url ->
+            repository.get(url, object : NetworkCallback(callInProgress) {
+                override fun onSuccess() {
+                    repository.insertEntity(Service(name, url, ServiceStatus.OK))
+                }
+
+                override fun onUnsuccessful() {
+                    repository.insertEntity(Service(name, url, ServiceStatus.FAIL))
+                }
+
+                override fun onComplete() {
+                    super.onComplete()
+                    callCompleteCallBack.invoke()
+                }
+            })
+        }
+    }
 }
