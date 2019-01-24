@@ -8,7 +8,7 @@ import okhttp3.Response
 import java.io.IOException
 
 
-abstract class NetworkCallback(private val loader: MutableLiveData<Boolean>) : Callback {
+abstract class NetworkCallback(private val loader: MutableLiveData<Boolean>? = null) : Callback {
     override fun onFailure(call: Call, e: IOException) {
         onUnsuccessful()
         onComplete()
@@ -30,6 +30,6 @@ abstract class NetworkCallback(private val loader: MutableLiveData<Boolean>) : C
 
     @CallSuper
     open fun onComplete() {
-        loader.postValue(false)
+        loader?.postValue(false)
     }
 }

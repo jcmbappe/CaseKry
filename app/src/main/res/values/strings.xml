@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">CaseKry</string>
 
-    <string name="status_ok">Status : OK</string>
-    <string name="status_fail">Status : FAIL</string>
+    <string name="status_ok">OK</string>
+    <string name="status_fail">FAIL</string>
 
     <string name="hint_name">Name</string>
     <string name="helper_require">Require</string>

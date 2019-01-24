@@ -26,6 +26,8 @@ class FormViewModel(application: Application, repository: BaseRepository<Service
         urlError.value = url.get().isNullOrEmpty()
 
         KotlinTools.let(name.get(), url.get()) { name, url ->
+            callInProgress.value = true
+
             val formatUrl = "https://${url.trim()}"
             repository.get(formatUrl, object : NetworkCallback(callInProgress) {
                 override fun onSuccess() {

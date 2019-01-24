@@ -37,7 +37,7 @@
                     android:maxLines="1"
                     android:text="@{viewModel.name}"
                     app:layout_constraintEnd_toStartOf="@id/status"
-                    app:layout_constraintHorizontal_weight="2"
+                    app:layout_constraintHorizontal_weight="4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:text="Livi" />
@@ -48,12 +48,13 @@
                     android:layout_width="0dp"
                     android:text="@{viewModel.status}"
                     android:layout_height="wrap_content"
+                    android:textColor="@{viewModel.color}"
                     app:layout_constraintBottom_toBottomOf="@id/name"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_weight="1"
                     app:layout_constraintStart_toEndOf="@id/name"
                     app:layout_constraintTop_toTopOf="@id/name"
-                    tools:text="Status : OK" />
+                    tools:text="OK" />
 
                 <TextView
                     android:id="@+id/url"

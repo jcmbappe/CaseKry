@@ -56,7 +56,7 @@ class ServiceListFragment : Fragment() {
             interaction?.replaceFragment(FormFragment())
         }
 
-        viewModel.getServicesList().observe(this, Observer { list ->
+        viewModel.servicesList.observe(this, Observer { list ->
             list?.let { adapter.list = it }
         })
 
