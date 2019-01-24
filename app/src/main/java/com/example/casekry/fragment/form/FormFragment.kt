@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import com.example.casekry.R
 import com.example.casekry.databinding.FragmentFormBinding
 import com.example.casekry.repositories.ServicesRepository
+import com.example.casekry.utilities.runOnIoThread
 import com.example.casekry.viewModels.BaseViewModel
 import org.koin.android.ext.android.inject
 
@@ -42,7 +43,9 @@ class FormFragment : Fragment() {
 
             addButton.setOnClickListener {
                 this@FormFragment.viewModel.validation {
-                    activity?.onBackPressed()
+                     this@FormFragment.activity?.runOnUiThread{
+                        activity?.onBackPressed()
+                    }
                 }
             }
         }

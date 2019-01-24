@@ -22,21 +22,18 @@ class FormViewModel(application: Application, repository: BaseRepository<Service
     val callInProgress = MutableLiveData<Boolean>()
 
     fun validation(callCompleteCallBack: () -> Unit) {
-        if (name.get().isNullOrEmpty() || url.get().isNullOrEmpty()) {
-            when {
-                name.get().isNullOrEmpty() -> nameError.value = true
-                url.get().isNullOrEmpty() -> urlError.value = true
-            }
-        }
+        nameError.value = name.get().isNullOrEmpty()
+        urlError.value = url.get().isNullOrEmpty()
 
         KotlinTools.let(name.get(), url.get()) { name, url ->
-            repository.get(url, object : NetworkCallback(callInProgress) {
+            val formatUrl = "https://${url.trim()}"
+            repository.get(formatUrl, object : NetworkCallback(callInProgress) {
                 override fun onSuccess() {
-                    repository.insertEntity(Service(name, url, ServiceStatus.OK))
+                    repository.insertEntity(Service(name.trim(), formatUrl, ServiceStatus.OK))
                 }
 
                 override fun onUnsuccessful() {
-                    repository.insertEntity(Service(name, url, ServiceStatus.FAIL))
+                    repository.insertEntity(Service(name.trim(), formatUrl, ServiceStatus.FAIL))
                 }
 
                 override fun onComplete() {
